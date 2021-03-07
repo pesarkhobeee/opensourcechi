@@ -1,0 +1,22 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Validate pull requests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Yaml check
+        run: |
+          git --no-pager diff --unified=0 origin/main -- contributions_list.yaml | grep '^+  -' | while read args;do echo $args | awk '{if ($3 ==""){print $0,"=>","Not valid entry"; exit 1;}else{print $3}}'; done
