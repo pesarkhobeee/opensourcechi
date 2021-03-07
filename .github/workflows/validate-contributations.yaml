@@ -17,6 +17,7 @@ jobs:
         id: YamlCheck
         shell: bash
         run: |
+          set -x
           echo START
           git fetch origin main --depth=1
           git branch --show-current
