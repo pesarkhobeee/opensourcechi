@@ -4,10 +4,9 @@
 name: Validate pull requests
 
 on:
-  push:
-    branches: [ master ]
+  [push]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
