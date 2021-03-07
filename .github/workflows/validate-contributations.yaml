@@ -12,7 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+        with:
+          ref: main
       - name: Yaml check
         run: |
-          git --no-pager diff --unified=0 origin/main -- contributions_list.yaml | grep '^+  -' | while read args;do echo $args | awk '{if ($3 ==""){print $0,"=>","Not valid entry"; exit 1;}else{print $3}}'; done
+          git --no-pager diff --unified=0 main -- contributions_list.yaml | grep '^+  -' | while read args;do echo $args | awk '{if ($3 ==""){print $0,"=>","Not valid entry"; exit 1;}else{print $3}}'; done
