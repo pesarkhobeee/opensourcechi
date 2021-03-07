@@ -20,7 +20,7 @@ jobs:
           echo START
           git fetch origin main --depth=1
           git branch --show-current
-          git --no-pager diff --unified=0 origin/main -- contributions_list.yaml | grep '^+  -' | while read args;do echo $args | awk '{if ($3 ==""){print $0,"=>","Not valid entry"; exit 1;}else{print $3}}'| echo -;echo "::set-output name=YamlCheck::strawberry"; done
+          git --no-pager diff --unified=0 origin/main -- contributions_list.yaml | grep '^+  -' | while read args;do echo $args | awk '{if ($3 ==""){print $0,"=>","Not valid entry"; exit 1;}else{print $3}}'| xargs echo;echo "::set-output name=YamlCheck::strawberry"; done
           echo "::set-output name=YamlCheck::Farid"
           echo END
       - name: check Resault
